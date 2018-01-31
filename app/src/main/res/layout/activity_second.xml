@@ -1,23 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_second"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/fl_my_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        ></FrameLayout>
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
-        android:background="@android:color/transparent"
+        android:background="#50686868"
         android:orientation="horizontal"
-        android:paddingBottom="15dp"
-        android:paddingTop="15dp"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
         android:visibility="visible">
 
         <LinearLayout
             android:id="@+id/linear1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:orientation="vertical"
@@ -32,19 +40,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:text="闪光灯"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
                 android:visibility="visible" />
         </LinearLayout>
 
-    </LinearLayout>
-
-    <FrameLayout
-        android:id="@+id/fl_my_container"
-        android:layout_width="match_parent"
-        android:layout_height="410dp"
-        android:visibility="visible"
-        ></FrameLayout>
+    </FrameLayout>
 
 </FrameLayout>
