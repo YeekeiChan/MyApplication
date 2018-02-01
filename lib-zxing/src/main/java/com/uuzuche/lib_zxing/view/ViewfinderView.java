@@ -42,16 +42,26 @@ import java.util.HashSet;
  */
 public final class ViewfinderView extends View {
 
+    //刷新界面的时间
     private static final long ANIMATION_DELAY = 100L;
     private static final int OPAQUE = 0xFF;
 
-    private final Paint paint;
+    private final Paint paint;//画笔对象的引用
     private Bitmap resultBitmap;
     private final int maskColor;
     private final int resultColor;
     private final int resultPointColor;
     private Collection<ResultPoint> possibleResultPoints;
     private Collection<ResultPoint> lastPossibleResultPoints;
+
+    private int scanLineTop;// 扫描线移动的y
+    private int SCAN_VELOCITY;// 扫描线移动速度
+    private Bitmap scanLight;// 扫描线
+    private boolean isCircle;// 是否展示小圆点
+
+    private int innercornercolor;// 扫描框边角颜色
+    private int innercornerlength;// 扫描框边角长度
+    private int innercornerwidth;// 扫描框边角宽度
 
     public ViewfinderView(Context context) {
         this(context, null);
@@ -126,9 +136,11 @@ public final class ViewfinderView extends View {
         if (frame == null) {
             return;
         }
-        int width = canvas.getWidth();
-        int height = canvas.getHeight();
+        int width = canvas.getWidth();//获取屏幕的宽
+        int height = canvas.getHeight();//获取屏幕的高
 
+        //画出扫描框外面的阴影部分，共四个部分，扫描框的上面到屏幕上面，扫描框的下面到屏幕下面
+        //扫描框的左边面到屏幕左边，扫描框的右边到屏幕右边
         // Draw the exterior (i.e. outside the framing rect) darkened
         paint.setColor(resultBitmap != null ? resultColor : maskColor);
         canvas.drawRect(0, 0, width, frame.top, paint);
@@ -177,11 +189,6 @@ public final class ViewfinderView extends View {
         }
     }
 
-    private int scanLineTop;// 扫描线移动的y
-    private int SCAN_VELOCITY;// 扫描线移动速度
-    private Bitmap scanLight;// 扫描线
-    private boolean isCircle;// 是否展示小圆点
-
     /**
      * 绘制移动扫描线
      *
@@ -203,10 +210,6 @@ public final class ViewfinderView extends View {
                 scanLineTop + 30);
         canvas.drawBitmap(scanLight, null, scanRect, paint);
     }
-
-    private int innercornercolor;// 扫描框边角颜色
-    private int innercornerlength;// 扫描框边角长度
-    private int innercornerwidth;// 扫描框边角宽度
 
     /**
      * 绘制取景框边框
